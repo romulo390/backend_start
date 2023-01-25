@@ -31,11 +31,11 @@ public interface GeneroResource {
 	
 	@Operation(summary = "Insere um Genero")
 	@PostMapping()
-	ResponseEntity<GeneroDTO> insert(@RequestBody @Valid GeneroInputDTO tipo);
+	ResponseEntity<GeneroDTO> insert(@RequestBody @Valid GeneroInputDTO genero);
 	
 	@Operation(summary = "Atualiza um Genero")
 	@PutMapping(value = "/{id}")
-	ResponseEntity<GeneroDTO> update(@PathVariable Long id, @RequestBody @Valid GeneroInputDTO tipo);
+	ResponseEntity<GeneroDTO> update(@PathVariable Long id, @RequestBody @Valid GeneroInputDTO genero);
 	
 	@Operation(summary = "Exclui um genro pelo id")
 	@DeleteMapping(value = "/{id}")

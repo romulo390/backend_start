@@ -36,8 +36,8 @@ public class GeneroResourceImpl implements GeneroResource{
 	
 	@Override
 	public ResponseEntity<GeneroDTO> findById(Long id) {
-		Genero Genero = this.service.findById(id);
-		GeneroDTO gto = mapper.toDTO(Genero);
+		Genero genero = this.service.findById(id);
+		GeneroDTO gto = mapper.toDTO(genero);
 		return ResponseEntity.ok(gto);
 	}
 
@@ -46,14 +46,14 @@ public class GeneroResourceImpl implements GeneroResource{
 		return ResponseEntity.ok(
 					this.service.findAll()
 					.stream()
-					.map(Genero -> mapper.toDTO(Genero))
+					.map(genero -> mapper.toDTO(genero))
 					.collect(Collectors.toList())
 				);
 	}
 
 	@Override
-	public ResponseEntity<GeneroDTO> insert(@RequestBody @Valid GeneroInputDTO Genero) {
-		Genero entity = mapper.toEntity(Genero);
+	public ResponseEntity<GeneroDTO> insert(@RequestBody @Valid GeneroInputDTO genero) {
+		Genero entity = mapper.toEntity(genero);
 		Genero createdEntity = this.service.insert(entity);
 		
 		URI location = ServletUriComponentsBuilder
@@ -67,9 +67,9 @@ public class GeneroResourceImpl implements GeneroResource{
 	}
 
 	@Override
-	public ResponseEntity<GeneroDTO> update(Long id, @Valid GeneroInputDTO Genero) {
+	public ResponseEntity<GeneroDTO> update(Long id, @Valid GeneroInputDTO genero) {
 		Genero toUpdate = this.service.findById(id);
-		toUpdate.setDescricao(Genero.getDescricao());
+		toUpdate.setDescricao(genero.getDescricao());
 		
 		Genero updated = this.service.update(toUpdate);
 		return ResponseEntity.ok(mapper.toDTO(updated));

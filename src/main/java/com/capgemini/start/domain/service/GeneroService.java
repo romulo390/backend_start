@@ -35,21 +35,21 @@ public class GeneroService extends AbstractService<Genero, Long> {
 	}
 	
 	@Override
-	public Genero insert(Genero Genero) {
-		if (this.repository.existsByDescricaoIgnoreCase(Genero.getDescricao())){
+	public Genero insert(Genero genero) {
+		if (this.repository.existsByDescricaoIgnoreCase(genero.getDescricao())){
 			throw new ObjectAlreadyExistsException("Já existe um Genero com esta descrição.");
 		}
-		Genero.setDataInclusao(new Date());
-		return this.repository.save(Genero);
+		genero.setDataInclusao(new Date());
+		return this.repository.save(genero);
 	}
 	
 	@Override
-	public Genero update(Genero Genero) {
-		if (this.repository.existsByIdNotAndDescricaoIgnoreCase(Genero.getId(), Genero.getDescricao())) {
+	public Genero update(Genero genero) {
+		if (this.repository.existsByIdNotAndDescricaoIgnoreCase(genero.getId(), genero.getDescricao())) {
 			throw new ObjectAlreadyExistsException("Já existe outro Genero com esta descrição.");
 		}
-		Genero.setDataAlteracao(new Date());
-		return this.repository.save(Genero);
+		genero.setDataAlteracao(new Date());
+		return this.repository.save(genero);
 	}
 
 }
