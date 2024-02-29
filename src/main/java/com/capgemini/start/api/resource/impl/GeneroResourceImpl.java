@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -28,15 +29,16 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping(value = "/api/generos")
 public class GeneroResourceImpl implements GeneroResource{
-	
+
 	private final GeneroService service;
-	
+
 	@Autowired
 	private GeneroMapper mapper;
-	
+
 	@Override
 	public ResponseEntity<GeneroDTO> findById(Long id) {
 		Genero genero = this.service.findById(id);
+		System.out.println("Valor genero: "+genero.getDescricao());
 		GeneroDTO gto = mapper.toDTO(genero);
 		return ResponseEntity.ok(gto);
 	}
